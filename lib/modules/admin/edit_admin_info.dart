@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:food_shopping_app/layout/admin_cubit/cubit.dart';
 import 'package:food_shopping_app/layout/admin_cubit/state.dart';
 
+// ignore: must_be_immutable
 class EditAdminProfile extends StatelessWidget {
   EditAdminProfile({Key? key}) : super(key: key);
   var nameController = TextEditingController();

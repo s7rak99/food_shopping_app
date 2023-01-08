@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:food_shopping_app/layout/admin_cubit/admin_layout.dart';
-import 'package:food_shopping_app/modules/admin/product_screen.dart';
 import 'package:food_shopping_app/shared/component/component.dart';
 
 import '../../layout/admin_cubit/cubit.dart';
 import '../../layout/admin_cubit/state.dart';
 
+// ignore: must_be_immutable
 class AddProductScreen extends StatelessWidget {
   AddProductScreen({Key? key}) : super(key: key);
 

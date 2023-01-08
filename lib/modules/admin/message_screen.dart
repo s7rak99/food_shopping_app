@@ -7,6 +7,7 @@ import 'package:food_shopping_app/shared/component/component.dart';
 import '../../model/user_note_model.dart';
 import 'edit_product_details.dart';
 
+// ignore: must_be_immutable
 class MessageScreen extends StatelessWidget {
   UserNoteModel userNoteModel;
 
@@ -63,7 +64,6 @@ class MessageScreen extends StatelessWidget {
                             AdminCubit.get(context)
                                 .getOneProduct(userNoteModel.productId)
                                 .whenComplete(() {
-                              // print('hereeeeeeeeeeeeeeeeeeeeee ${value!.name}');
                               navigateTo(
                                   context,
                                   EditProductDetails(

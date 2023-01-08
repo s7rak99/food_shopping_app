@@ -1,4 +1,3 @@
-import 'package:bloc/bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -8,7 +7,6 @@ import 'package:food_shopping_app/modules/login/cubit/state.dart';
 
 import '../../../model/user_model.dart';
 import '../../../shared/constants/constants.dart';
-import '../../../shared/network/remote/dio_helper.dart';
 
 class LoginCubit extends Cubit<LoginState> {
   LoginCubit() : super(LoginInitialState());

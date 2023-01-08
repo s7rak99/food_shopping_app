@@ -1,22 +1,17 @@
 import 'dart:async';
 
-import 'package:bloc/bloc.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:food_shopping_app/layout/admin_cubit/cubit.dart';
-import 'package:food_shopping_app/layout/admin_cubit/state.dart';
 import 'package:food_shopping_app/layout/user_cubit/cubit.dart';
 import 'package:food_shopping_app/layout/user_cubit/shop_layout.dart';
 import 'package:food_shopping_app/layout/user_cubit/state.dart';
 import 'package:food_shopping_app/modules/login/login_screen.dart';
-import 'package:food_shopping_app/modules/register/register_screen.dart';
 import 'package:food_shopping_app/shared/bloc_observer.dart';
-import 'package:food_shopping_app/shared/component/component.dart';
 import 'package:food_shopping_app/shared/constants/constants.dart';
 import 'package:food_shopping_app/shared/network/remote/cache_helper.dart';
-import 'package:food_shopping_app/shared/network/remote/dio_helper.dart';
 import 'package:hexcolor/hexcolor.dart';
 
 import 'layout/admin_cubit/admin_layout.dart';
@@ -26,7 +21,6 @@ void main() async {
 
   await Firebase.initializeApp();
   Bloc.observer = MyBlocObserver();
-  DioHelper.init();
   await CacheHelper.init();
   uId = CacheHelper.getData(key: 'uId');
   isAdmin = CacheHelper.getData(key: 'isAdmin') ?? false;
@@ -44,6 +38,7 @@ void main() async {
   runApp(MyApp(firstWidget, isDark));
 }
 
+// ignore: must_be_immutable
 class MyApp extends StatefulWidget {
   Widget? firstWidget;
 bool? isDark;
@@ -59,6 +54,7 @@ class _MyAppState extends State<MyApp> {
 
   @override
   void initState() {
+
     Timer.periodic(Duration(seconds: 5), (timer) {
       setState(() {
         s = true;
@@ -80,12 +76,12 @@ class _MyAppState extends State<MyApp> {
           BlocProvider(
               create: (context) => ShopCubit()
                 ..getUserData()
-                ..getProducts()..changeTheme(fromShared: false)),
+                ..getProducts()
+                ..changeTheme(fromShared: false)),
         ],
         child: BlocConsumer<ShopCubit, ShopStates>(
             builder: (context, state) {
               return MaterialApp(
-                // theme: ShopCubit.get(context).dark?darkMode:lightTheme,ShopCubit.get(context).dark?ThemeMode.dark:
                 themeMode: ShopCubit.get(context).dark?ThemeMode.dark:ThemeMode.light,
                 debugShowCheckedModeBanner: false,
                 home: Builder(

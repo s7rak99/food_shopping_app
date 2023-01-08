@@ -1,4 +1,3 @@
-import 'package:bloc/bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -79,7 +78,7 @@ class RegisterCubit extends Cubit<RegisterState> {
   UserModel? userModel;
 
   Future<void> getUserData() async{
-    emit(RegisterGetUserloadingState());
+    emit(RegisterGetUserLoadingState());
 
     if (uId != null) {
       await FirebaseFirestore.instance
@@ -93,7 +92,7 @@ class RegisterCubit extends Cubit<RegisterState> {
         emit(RegisterGetUserSuccessState());
       }).catchError((err) {
         print(err.toString());
-        emit(RegisterGetUserErrortate());
+        emit(RegisterGetUserErrorState());
       });
     }
   }

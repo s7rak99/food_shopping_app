@@ -16,6 +16,7 @@ import '../../shared/network/remote/cache_helper.dart';
 
 
 
+// ignore: must_be_immutable
 class ShopLayout extends StatelessWidget {
   ShopLayout({Key? key}) : super(key: key);
 

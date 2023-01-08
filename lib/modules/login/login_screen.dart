@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:food_shopping_app/layout/admin_cubit/admin_layout.dart';
-import 'package:food_shopping_app/layout/admin_cubit/cubit.dart';
 import 'package:food_shopping_app/modules/login/cubit/cubit.dart';
 import 'package:food_shopping_app/modules/register/register_screen.dart';
 import 'package:food_shopping_app/shared/constants/constants.dart';
@@ -11,6 +10,7 @@ import '../../shared/component/component.dart';
 import '../../shared/network/remote/cache_helper.dart';
 import 'cubit/state.dart';
 
+// ignore: must_be_immutable
 class LoginScreen extends StatelessWidget {
   LoginScreen({Key? key}) : super(key: key);
   var formKey = GlobalKey<FormState>();
@@ -47,7 +47,7 @@ class LoginScreen extends StatelessWidget {
                   CacheHelper.saveDate(
                       key: 'isAdmin',
                       val: LoginCubit.get(context).userModel!.isAdmin!);
-                  print('savessss');
+                  print('saves');
                   CacheHelper.saveDate(key: 'uId', val: state.uId)
                       .then((value) {
                     navigatePush(context, ShopLayout());

@@ -5,13 +5,12 @@ import 'package:food_shopping_app/modules/register/register_cubit/cubit.dart';
 import 'package:food_shopping_app/modules/register/register_cubit/state.dart';
 
 import '../../layout/admin_cubit/admin_layout.dart';
-import '../../layout/admin_cubit/cubit.dart';
 import '../../layout/user_cubit/shop_layout.dart';
 import '../../shared/component/component.dart';
 import '../../shared/constants/constants.dart';
 import '../../shared/network/remote/cache_helper.dart';
-import '../login/cubit/cubit.dart';
 
+// ignore: must_be_immutable
 class RegisterScreen extends StatelessWidget {
   RegisterScreen({Key? key}) : super(key: key);
   var formKey = GlobalKey<FormState>();
@@ -40,7 +39,7 @@ class RegisterScreen extends StatelessWidget {
                 } else {
                   toast(message: 'success user', states: ToastsStates.SUCCESS);
                   CacheHelper.saveDate(key: 'isAdmin', val: RegisterCubit.get(context).userModel!.isAdmin!);
-                  print('savessss');
+                  print('saves');
                   CacheHelper.saveDate(key: 'uId', val: state.uId)
                       .then((value) {
                     RegisterCubit.get(context).getUserData().whenComplete(() {

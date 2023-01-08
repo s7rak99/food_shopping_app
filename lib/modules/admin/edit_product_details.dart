@@ -1,4 +1,3 @@
-import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -8,6 +7,7 @@ import 'package:food_shopping_app/layout/admin_cubit/state.dart';
 import 'package:food_shopping_app/model/product_model.dart';
 import 'package:food_shopping_app/shared/component/component.dart';
 
+// ignore: must_be_immutable
 class EditProductDetails extends StatelessWidget {
   EditProductDetails(ProductModel this.productModel, {Key? key})
       : super(key: key);

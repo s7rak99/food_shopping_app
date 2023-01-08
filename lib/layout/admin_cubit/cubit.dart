@@ -1,6 +1,5 @@
 import 'dart:io';
 
-import 'package:bloc/bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -317,7 +316,6 @@ class AdminCubit extends Cubit<AdminStates> {
         .get()
         .then((value) {
       productModel = ProductModel.fromJson(value.data()!);
-      print('hererererer ${productModel!.name}');
       emit(AdminGetAllNotesSuccessStates());
     }).catchError((error) {
       print(error.toString());

@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../layout/user_cubit/cubit.dart';
 import '../../layout/user_cubit/state.dart';
 
+// ignore: must_be_immutable
 class EditUserProfile extends StatelessWidget {
   EditUserProfile({Key? key}) : super(key: key);
    var nameController = TextEditingController();

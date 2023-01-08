@@ -27,5 +27,7 @@ class RegisterCreateUserErrorState extends RegisterState {
 class RegisterChangePasswordVisibilityState extends RegisterState {}
 
 class RegisterGetUserSuccessState extends RegisterState {}
-class RegisterGetUserErrortate extends RegisterState {}
-class RegisterGetUserloadingState extends RegisterState {}
+
+class RegisterGetUserErrorState extends RegisterState {}
+
+class RegisterGetUserLoadingState extends RegisterState {}
