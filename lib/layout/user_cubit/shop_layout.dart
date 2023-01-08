@@ -44,7 +44,7 @@ class ShopLayout extends StatelessWidget {
           appBar: AppBar(
             actions: [
               IconButton(onPressed: (){
-                ShopCubit.get(context).changeTheme();
+                ShopCubit.get(context).changeThemeFromFirebase();
               }, icon: Icon(Icons.dark_mode,color: Colors.pink[700],)),
               SizedBox(width: 10.0,)
             ],
@@ -81,7 +81,7 @@ class ShopLayout extends StatelessWidget {
                                     image: DecorationImage(
                                       fit: BoxFit.cover,
                                       image: NetworkImage(
-                                        '${ShopCubit.get(context).userModel!.image!}',
+                                          ShopCubit.get(context).userModel ==null?'images/foods.png':'${ShopCubit.get(context).userModel!.image!}',
                                       ),
                                     ),
                                   ),
@@ -246,9 +246,8 @@ class ShopLayout extends StatelessWidget {
                     ],
                   ),
           ),
-          body: ShopCubit.get(context).products.isEmpty ||
-                  ShopCubit.get(context).userModel == null || state is changeThemeLoadingStates
-
+          body: ShopCubit.get(context).products.isEmpty &&
+                  ShopCubit.get(context).userModel == null
               ? Padding(
                   padding: const EdgeInsets.only(top: 8.0),
                   child: LinearProgressIndicator(),

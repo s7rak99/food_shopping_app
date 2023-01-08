@@ -77,3 +77,5 @@ class UserUploadInfoErrorStates extends ShopStates {}
 class changeThemeStates extends ShopStates {}
 
 class changeThemeLoadingStates extends ShopStates {}
+class getThemeStates extends ShopStates {}
+

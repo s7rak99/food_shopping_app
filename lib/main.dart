@@ -24,7 +24,7 @@ void main() async {
   await CacheHelper.init();
   uId = CacheHelper.getData(key: 'uId');
   isAdmin = CacheHelper.getData(key: 'isAdmin') ?? false;
-  bool? isDark =CacheHelper.getData(key: 'isAdmin');
+  bool? isDark = CacheHelper.getData(key: 'isAdmin');
   Widget? firstWidget;
   if (uId != null && isAdmin != null) {
     if (isAdmin == true)
@@ -41,24 +41,22 @@ void main() async {
 // ignore: must_be_immutable
 class MyApp extends StatefulWidget {
   Widget? firstWidget;
-bool? isDark;
-  MyApp(this.firstWidget,this.isDark, {super.key});
+  bool? isDark;
+
+  MyApp(this.firstWidget, this.isDark, {super.key});
 
   @override
   State<MyApp> createState() => _MyAppState();
 }
 
 class _MyAppState extends State<MyApp> {
-  
   bool s = false;
 
   @override
   void initState() {
-
     Timer.periodic(Duration(seconds: 5), (timer) {
       setState(() {
         s = true;
-
       });
     });
     super.initState();
@@ -75,40 +73,54 @@ class _MyAppState extends State<MyApp> {
                 ..getNotes()),
           BlocProvider(
               create: (context) => ShopCubit()
+                ..getTheme()
                 ..getUserData()
                 ..getProducts()
-                ..changeTheme(fromShared: false)),
+                ),
         ],
         child: BlocConsumer<ShopCubit, ShopStates>(
             builder: (context, state) {
               return MaterialApp(
-                themeMode: ShopCubit.get(context).dark?ThemeMode.dark:ThemeMode.light,
+                themeMode: ShopCubit.get(context).isDark
+                    ? ThemeMode.dark
+                    : ThemeMode.light,
                 debugShowCheckedModeBanner: false,
                 home: Builder(
                   builder: (context) {
-                      return MediaQuery(
-                          data: MediaQuery.of(context).copyWith(
-                            textScaleFactor: MediaQuery.of(context).size.width.toInt() <= 450?0.9:1.5,
-                          ),
-                          child: s? widget.firstWidget!:
-                      Scaffold(
-                        body: Container(
-                          width: double.infinity,
-                          height: double.infinity,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Image.asset('images/foods.png', width: 300, height: 300, fit: BoxFit.cover,),
-                              ],
-                          ),
+                    return MediaQuery(
+                        data: MediaQuery.of(context).copyWith(
+                          textScaleFactor:
+                              MediaQuery.of(context).size.width.toInt() <= 450
+                                  ? 0.9
+                                  : 1.5,
                         ),
-                      ));
+                        child: s
+                            ? widget.firstWidget!
+                            : Scaffold(
+                                body: Container(
+                                  width: double.infinity,
+                                  height: double.infinity,
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: [
+                                      Image.asset(
+                                        'images/foods.png',
+                                        width: 300,
+                                        height: 300,
+                                        fit: BoxFit.cover,
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ));
                   },
                 ),
                 darkTheme: ThemeData(
                   inputDecorationTheme: const InputDecorationTheme(
-                      iconColor: Colors.white, labelStyle: TextStyle(color: Colors.white)),
+                      iconColor: Colors.white,
+                      labelStyle: TextStyle(color: Colors.white)),
                   textTheme: const TextTheme(
                     bodyText2: TextStyle(
                       color: Colors.grey,
@@ -149,7 +161,8 @@ class _MyAppState extends State<MyApp> {
                   scaffoldBackgroundColor: HexColor('333236'),
                   primarySwatch: Colors.pink,
                   floatingActionButtonTheme:
-                  const FloatingActionButtonThemeData(backgroundColor: Colors.pink),
+                      const FloatingActionButtonThemeData(
+                          backgroundColor: Colors.pink),
                   appBarTheme: AppBarTheme(
                       titleSpacing: 20.0,
                       iconTheme: const IconThemeData(
@@ -157,7 +170,9 @@ class _MyAppState extends State<MyApp> {
                         size: 30.0,
                       ),
                       titleTextStyle: const TextStyle(
-                          color: Colors.grey, fontSize: 20.0, fontWeight: FontWeight.bold),
+                          color: Colors.grey,
+                          fontSize: 20.0,
+                          fontWeight: FontWeight.bold),
 // backwardsCompatibility: false,
                       backgroundColor: HexColor('333236'),
                       elevation: 0.0,
@@ -170,9 +185,8 @@ class _MyAppState extends State<MyApp> {
                       elevation: 20.0,
                       backgroundColor: HexColor('333236'),
                       unselectedItemColor: Colors.grey),
-                  drawerTheme: DrawerThemeData(
-                      backgroundColor: HexColor('333236')
-                  ),
+                  drawerTheme:
+                      DrawerThemeData(backgroundColor: HexColor('333236')),
                 ),
                 theme: ThemeData(
                   fontFamily: 'MyFont',
@@ -202,13 +216,14 @@ class _MyAppState extends State<MyApp> {
                       fontSize: 14.0,
                       fontWeight: FontWeight.bold,
                     ),
-
                     headline5: TextStyle(
-                        color: Colors.pink, fontSize: 40.0, fontWeight: FontWeight.bold),
+                        color: Colors.pink,
+                        fontSize: 40.0,
+                        fontWeight: FontWeight.bold),
                   ),
                   primarySwatch: Colors.pink,
-                  floatingActionButtonTheme:
-                  FloatingActionButtonThemeData(backgroundColor: Colors.pink[700]),
+                  floatingActionButtonTheme: FloatingActionButtonThemeData(
+                      backgroundColor: Colors.pink[700]),
                   scaffoldBackgroundColor: Colors.white,
                   appBarTheme: const AppBarTheme(
                       titleSpacing: 20.0,

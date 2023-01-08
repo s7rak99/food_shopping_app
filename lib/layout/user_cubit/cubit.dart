@@ -15,7 +15,6 @@ import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 
 import '../../shared/network/remote/cache_helper.dart';
 
-
 class ShopCubit extends Cubit<ShopStates> {
   ShopCubit() : super(ShopInitialStates());
 
@@ -84,11 +83,10 @@ class ShopCubit extends Cubit<ShopStates> {
     });
   }
 
-
-
   List<ProductModel> cart = [];
- Map<double, int> counts = {};
- // List<double> counts= [];
+  Map<double, int> counts = {};
+
+  // List<double> counts= [];
 
   Future<void> getAllProductInCart() async {
     cart = [];
@@ -110,7 +108,7 @@ class ShopCubit extends Cubit<ShopStates> {
         });
 
         emit(ShopGetCartSuccessStates());
-      }).whenComplete((){
+      }).whenComplete(() {
         calcPrice();
       }).catchError((err) {
         print(err.toString());
@@ -121,13 +119,12 @@ class ShopCubit extends Cubit<ShopStates> {
 
   double fullPrice = 0.0;
 
-  Future<void> calcPrice() async{
-
+  Future<void> calcPrice() async {
     fullPrice = 0.0;
     counts.forEach((key, value) {
       print(key);
       print(value);
-      fullPrice+=(key*value);
+      fullPrice += (key * value);
       print(('==============> $fullPrice'));
       emit(ShopCalcPriceState());
     });
@@ -145,7 +142,7 @@ class ShopCubit extends Cubit<ShopStates> {
       image: productModel.image,
       quantity: productModel.quantity! + 1,
       price: productModel.price,
-      count: productModel.count! -1,
+      count: productModel.count! - 1,
     );
 
     await FirebaseFirestore.instance
@@ -189,7 +186,7 @@ class ShopCubit extends Cubit<ShopStates> {
       image: productModel.image,
       quantity: productModel.quantity! - 1,
       price: productModel.price,
-      count: productModel.count! +1,
+      count: productModel.count! + 1,
     );
 
     await FirebaseFirestore.instance
@@ -292,24 +289,22 @@ class ShopCubit extends Cubit<ShopStates> {
   Future<void> getInvoice() async {
     invoices = [];
     emit(ShopGetInvoiceLoadingStates());
-    await FirebaseFirestore
-    .instance
-    .collection('users')
-    .doc(userModel!.uId)
-    .collection('invoices')
-    .orderBy('quantity')
-    .get()
+    await FirebaseFirestore.instance
+        .collection('users')
+        .doc(userModel!.uId)
+        .collection('invoices')
+        .orderBy('quantity')
+        .get()
         .then((value) {
       value.docs.forEach((element) {
         invoices.add(InvoiceModel.fromJson(element.data()));
       });
       emit(ShopGetInvoiceSuccessStates());
-    }).catchError((err){
+    }).catchError((err) {
       print(err.toString());
       emit(ShopGetInvoiceErrorStates());
     });
   }
-
 
   File? profileImage;
 
@@ -378,24 +373,44 @@ class ShopCubit extends Cubit<ShopStates> {
     });
   }
 
-  bool dark= false;
-  Future<void> changeTheme ({fromShared})async{
+  bool dark = false;
+
+  Future<void> changeTheme({fromShared}) async {
     emit(changeThemeLoadingStates());
 
-    if(fromShared!=null){
+    if (fromShared != null) {
       dark = fromShared;
-    }
-    else{
+    } else {
       dark = !dark;
       print(dark);
-      CacheHelper.saveDate(key: 'isDark', val: dark ).then((value) {
+      CacheHelper.saveDate(key: 'isDark', val: dark).then((value) {
         getProducts();
         emit(changeThemeStates());
       });
     }
-
-
   }
 
+  bool isDark = false;
 
+  Future<void> changeThemeFromFirebase() async {
+    await FirebaseFirestore.instance.collection('isDark').doc('1').set({
+      'isDark': !isDark,
+    }).then((value) {
+      print('$isDark');
+      getTheme();
+      emit(changeThemeStates());
+    });
+  }
+
+  Future<void> getTheme() async {
+    await FirebaseFirestore.instance
+        .collection('isDark')
+        .doc('1')
+        .get()
+        .then((value) {
+      isDark = value.data()!['isDark'];
+      print('$isDark');
+      emit(getThemeStates());
+    });
+  }
 }
