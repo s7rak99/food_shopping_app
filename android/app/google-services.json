@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "662994613776",
+    "project_id": "food-shopping-a134b",
+    "storage_bucket": "food-shopping-a134b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:662994613776:android:4017f34d15b5387f7bbc95",
+        "android_client_info": {
+          "package_name": "com.example.food_shopping_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "662994613776-doacg0uuuf47pk2bkp6e9ucg4eu7h51d.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.food_shopping_app",
+            "certificate_hash": "180da76e68c28ce09bf0550a0a6e59d180b5f34c"
+          }
+        },
+        {
+          "client_id": "662994613776-g5p4rpjpa5mlukhn0ft8agi8beed2jv7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCNuD8hFF_Mir1JWsvTez0f8sSjUGLy5kI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "662994613776-g5p4rpjpa5mlukhn0ft8agi8beed2jv7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
