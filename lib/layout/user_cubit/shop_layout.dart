@@ -247,7 +247,7 @@ class ShopLayout extends StatelessWidget {
                   ),
           ),
           body: ShopCubit.get(context).products.isEmpty &&
-                  ShopCubit.get(context).userModel == null
+                  ShopCubit.get(context).userModel == null && ShopCubit.get(context).notifications.isEmpty
               ? Padding(
                   padding: const EdgeInsets.only(top: 8.0),
                   child: LinearProgressIndicator(),
