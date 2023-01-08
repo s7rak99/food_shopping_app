@@ -22,7 +22,7 @@ ThemeData darkMode = ThemeData(
       fontWeight: FontWeight.bold,
     ),
     subtitle1: TextStyle(
-      color: Colors.black,
+      color: Colors.grey,
       fontSize: 14.0,
       fontWeight: FontWeight.bold,
     ),
