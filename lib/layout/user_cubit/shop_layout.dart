@@ -31,11 +31,13 @@ class ShopLayout extends StatelessWidget {
     return BlocConsumer<ShopCubit, ShopStates>(
       listener: (context, state) {
         if (state is ShopGetUserSuccessStates) {
-          ShopCubit.get(context).getNotifications();
-        }
-        if(state is changeThemeStates){
+          Future.delayed(Duration(seconds: 2)).whenComplete(() {
+            ShopCubit.get(context).getNotifications();
+            ShopCubit.get(context).getProducts();
 
+          });
         }
+
 
       },
       builder: (context, state) {
@@ -247,7 +249,7 @@ class ShopLayout extends StatelessWidget {
                   ),
           ),
           body: ShopCubit.get(context).products.isEmpty &&
-                  ShopCubit.get(context).userModel == null && ShopCubit.get(context).notifications.isEmpty
+                  ShopCubit.get(context).userModel == null
               ? Padding(
                   padding: const EdgeInsets.only(top: 8.0),
                   child: LinearProgressIndicator(),

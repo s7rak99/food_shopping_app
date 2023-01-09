@@ -33,6 +33,7 @@ class ShopCubit extends Cubit<ShopStates> {
           .then((value) {
         print(value.data());
         userModel = UserModel.fromJson(value.data()!);
+      }).whenComplete(() {
         emit(ShopGetUserSuccessStates());
       }).catchError((err) {
         print(err.toString());
@@ -46,20 +47,15 @@ class ShopCubit extends Cubit<ShopStates> {
 
   Future<void> getProducts() async {
     products = [];
-    //productId = {};
     emit(ShopGetProductLoadingStates());
 
     await FirebaseFirestore.instance.collection('products').get().then((value) {
       value.docs.forEach((element) async {
         products.add(ProductModel.fromJson(element.data()));
-        // productId[]
         productId[element.data()['name']] = element.id;
-        //print('-----------------------${element.data()['name'] } , ${element.id }');
       });
     }).whenComplete(() {
-      Future.delayed(const Duration(seconds: 2), () {
-        emit(ShopGetProductSuccessStates());
-      });
+      emit(ShopGetProductSuccessStates());
     }).catchError((error) {
       print(error.toString());
       emit(ShopGetProductErrorStates());

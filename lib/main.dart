@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -13,7 +12,6 @@ import 'package:food_shopping_app/shared/bloc_observer.dart';
 import 'package:food_shopping_app/shared/constants/constants.dart';
 import 'package:food_shopping_app/shared/network/remote/cache_helper.dart';
 import 'package:hexcolor/hexcolor.dart';
-
 import 'layout/admin_cubit/admin_layout.dart';
 
 void main() async {
@@ -75,7 +73,7 @@ class _MyAppState extends State<MyApp> {
               create: (context) => ShopCubit()
                 ..getTheme()
                 ..getUserData()
-                ..getProducts()
+                  ..getProducts()
                 ),
         ],
         child: BlocConsumer<ShopCubit, ShopStates>(

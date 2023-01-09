@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:food_shopping_app/layout/admin_cubit/admin_layout.dart';
+import 'package:food_shopping_app/layout/admin_cubit/cubit.dart';
+import 'package:food_shopping_app/layout/user_cubit/cubit.dart';
 import 'package:food_shopping_app/modules/login/cubit/cubit.dart';
 import 'package:food_shopping_app/modules/register/register_screen.dart';
 import 'package:food_shopping_app/shared/constants/constants.dart';
@@ -40,7 +42,10 @@ class LoginScreen extends StatelessWidget {
                       val: LoginCubit.get(context).userModel!.isAdmin!);
                   CacheHelper.saveDate(key: 'uId', val: state.uId)
                       .then((value) {
-                    navigatePush(context, AdminLayout());
+                        AdminCubit.get(context).getProducts();
+                        ShopCubit.get(context).getUserData();
+
+                        navigatePush(context, AdminLayout());
                   });
                 } else {
                   toast(message: 'success user', states: ToastsStates.SUCCESS);
@@ -50,7 +55,10 @@ class LoginScreen extends StatelessWidget {
                   print('saves');
                   CacheHelper.saveDate(key: 'uId', val: state.uId)
                       .then((value) {
-                    navigatePush(context, ShopLayout());
+                        ShopCubit.get(context).getProducts();
+                        ShopCubit.get(context).getUserData();
+
+                        navigatePush(context, ShopLayout());
                   });
                 }
               });
